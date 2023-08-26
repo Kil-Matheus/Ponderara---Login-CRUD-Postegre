@@ -18,13 +18,13 @@ Para executar a aplicação, siga os seguintes passos:
 3. Com a aplicação rodando, abra o terminal e execute o seguinte comando para puxar a imagem:
 
 ```bash
-docker pull kilmatheus/ponderada-crude:2.0.0
+docker pull kilmatheus/ponderada-crud:2.0.0
 ```
 
 4. Após puxar, execute o seguinte comando para rodar o contêiner:
 
 ```bash
-docker run -p 8000:8000 kilmatheus/curriculo-ponderada1:1.0.0
+docker run -p 8000:8000 kilmatheus/ponderada-crud:2.0.0
 ```
 
 Assim, a aplicação vai rodar e será possível acessar no navegador.
