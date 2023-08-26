@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponderada de Programação</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css') }}">
+</head>
+<style>
+    .container {
+      width: 300px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px auto;
+    }
+    .title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .content {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  </style>
+
+<body>
+    <h1>Bloco de Notas - CRUD</h1>
+    <br>
+    <form action="/insert" method='POST'>
+        <label for="title">Título <br>
+            <input type="text" name="title" id="title">
+        </label>
+
+        <label for="contents">Conteúdo<br>
+            <input type="text" name="contents" id="contents">
+        </label>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <br>
+
+    {% for valor in valores %}
+  <div class="container">
+      <form action="/delete" method='POST'>
+          <div class="title">{{ valor[0] }}</div>
+          <div class="content">{{ valor[1] }}</div>
+          <br>
+          <div>
+              <input type="hidden" name="valor" value="{{ valor[0] }}">
+              <button type="submit" name="action" value="delete" class="nb">
+                  <img src="{{ url_for('static', filename='trash-can.png') }}" alt="trash" class="icons">
+              </button>
+              <button type="button" class="nb edit-button" data-title="{{ valor[0] }}" data-content="{{ valor[1] }}">
+                  <img src="{{ url_for('static', filename='edit.png') }}" alt="edit" class="icons">
+              </button>
+          </div>
+      </form>
+  </div>
+    {% endfor %}
+
+    <!-- Modal para edição -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+          <span class="close">&times;</span>
+          <form id="editForm" action="/edit" method="POST">
+            <h2>Para Editar o Bloco, clique no simbolo e edite os valores aqui.<h2>
+              <input type="hidden" name="valor" id="edit-value">
+              <label for="edit-title">Novo Título <br>
+                <input type="text" name="new_title" id="edit-title">
+              </label>
+              <label for="edit-contents">Novo Conteúdo<br>
+                <input type="text" name="new_contents" id="edit-contents">
+              </label>
+              <button type="submit">Salvar</button>
+            </form>
+          </div>
+        </div>
+        
+</body>
+
+  <script>
+// Abre a modal quando o botão de edição é clicado
+const editButtons = document.querySelectorAll('.edit-button');
+const modal = document.getElementById('editModal');
+const modalValueInput = document.getElementById('edit-value');
+const modalTitleInput = document.getElementById('edit-title');
+const modalContentsInput = document.getElementById('edit-contents');
+
+editButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const title = button.getAttribute('data-title');
+        const content = button.getAttribute('data-content');
+
+        modalValueInput.value = title;
+        modalTitleInput.value = title;
+        modalContentsInput.value = content;
+
+        modal.style.display = 'block';
+    });
+});
+  </script>
+
+</html>
