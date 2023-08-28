@@ -115,3 +115,17 @@ services:
 ```
 
 Sendo assim, foi construido essa aplicação.
+
+Para executar a aplicaçãom entre na pasta raiz e execute o seguinte comando:
+
+```bash
+docker compose up
+```
+
+Após isso, a aplicação estará rodando e será possível acessar no navegador pela porta 8000.
+A login cadastrado é:
+
+```bash
+Login: Teste
+Senha: Teste123
+```
